@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lagrange's Interpolation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <form class="form">
+        <div class="container">
+            X Vector: <input class="form-control" type="text" name="x_vector"
+                placeholder="Enter space seperated values">
+            Y Vector: <input class="form-control" type="text" name="y_vector"
+                placeholder="Enter space seperated values">
+            <br><hr><br>
+
+            X value: <input class="form-control" type="text" name="x_value" placeholder="Enter value">
+            <br>
+        </div>
+    </form>
+
+    <div class="container">
+        <button class="btn btn-primary" onclick="calculate()">Calculate</button>
+    </div>
+
+    <script>
+        function calculate() {
+            x_vector = document.getElementsByName("x_vector")[0].value;
+            y_vector = document.getElementsByName("y_vector")[0].value;
+
+            x_vector = x_vector.split(" ");
+            y_vector = y_vector.split(" ");
+
+            if (x_vector.length != y_vector.length) {
+                alert("X and Y vectors must be of same size");
+                return;
+            }
+
+            x_calculate = document.getElementsByName("x_value")[0].value;
+            size = x_vector.length;
+            sum = 0;
+            for (i = 0; i < size; i++) {
+                product = 1;
+                for (j = 0; j < size; j++) {
+                    if (i != j) {
+                        product *= (x_calculate - x_vector[j]) / (x_vector[i] - x_vector[j]);
+                    }
+                }
+                sum += product * y_vector[i];
+            }
+
+            alert(sum);
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
